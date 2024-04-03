@@ -1,0 +1,23 @@
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+
+<h1> Member Name: {{ member.name }}</h1>
+{% if member.image %}
+    <img src="{{ member.image.url }}" alt="{{ member.name }} Image">
+{% endif %}
+
+<p><strong> Pronouns:</strong>{{ member.pronouns }}</p>
+<p><strong> Active Times:</strong> {{ member.active_times }}</p>
+<p><strong> Main character: under construction!</strong></p>
+<p><strong> About me:</strong> {{ member.about }}</p>
+
+{% if member.discord %}
+    <p><strong> Discord:</strong> {{ member.discord }}</p>
+{% endif %}
+
+{% if member.discord_message_box is False %}
+    <p><strong> Do not direct message me!</strong></p>
+{% endif %}
+
+{% endblock %}

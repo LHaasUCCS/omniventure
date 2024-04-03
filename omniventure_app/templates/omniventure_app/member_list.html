@@ -1,0 +1,24 @@
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+
+{% if member_list %}
+
+    <h1> Our Members </h1>
+
+    <ul>
+    {% for member in member_list %}
+        {% if member.is_active %}
+            <li>
+                <a href="{% url 'member_detail' member.pk %}">{{ member.name }}</a>
+            </li>
+        {% endif %}
+
+    {% endfor %}
+    </ul>
+
+{% else %}
+    <p>There are no members registered.</p>
+{% endif %}
+
+{% endblock %}
