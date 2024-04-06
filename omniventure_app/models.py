@@ -29,7 +29,21 @@ class Member(models.Model):
     about = models.CharField(max_length = 200, blank = True)
     discord = models.CharField(max_length = 100, blank = True)
     discord_message_check = models.BooleanField(default = False)
+
+    # For verification of profiles by admin before posting
     is_active = models.BooleanField(default = False)
+
+
+
+def save(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        if user and user.is_superuser:
+            self.is_active = True
+        # Call the parent class's save method directly
+        self.save_base(*args, **kwargs)
+
+
+
 
 def __str__(self):
     return self.title

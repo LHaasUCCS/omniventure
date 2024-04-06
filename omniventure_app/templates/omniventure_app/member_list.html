@@ -1,24 +1,45 @@
+<style>
+    .custom_button {
+        background-color: #FFDF91;
+        color: Black;
+        border-radius: 10px
+        /* Add more styles as needed */
+    }
+</style>
+
 {% extends "omniventure_app/base_template.html" %}
 
 {% block content %}
 
 {% if member_list %}
 
-    <h1> Our Members </h1>
+    <h1><div style="color: white"> Our Members </div></h1>
 
-    <ul>
     {% for member in member_list %}
         {% if member.is_active %}
-            <li>
-                <a href="{% url 'member_detail' member.pk %}">{{ member.name }}</a>
-            </li>
+
+            <div class="card" style="width: 30rem;">
+                <div class="card-body" style="background-color: #496996; display: flex; align-items: center;">
+                    <div>
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" alt="{{ member.name }} Image" style="max-width: 200px; max-height: 200px;">
+                        {% endif %}
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <button class="custom_button" onclick="window.location.href='{% url 'member_detail' member.pk %}'" type="button">{{ member.name }}</a>
+                    </div>
+                </div>
+            </div>
+        
         {% endif %}
 
     {% endfor %}
-    </ul>
+
 
 {% else %}
     <p>There are no members registered.</p>
 {% endif %}
+
+<button class="custom_button" onclick="window.location.href='{% url 'member_create' %}'" type="button">Create New</button>
 
 {% endblock %}

@@ -1,23 +1,40 @@
+<style>
+    .custom_button {
+        background-color: #FAC62B;
+        color: white;
+        border-radius: 10px
+        /* Add more styles as needed */
+    }
+
+    #content {
+        color: white;
+    }
+</style>
+
 {% extends "omniventure_app/base_template.html" %}
 
 {% block content %}
 
-<h1> Member Name: {{ member.name }}</h1>
+<h1 id="content"> Member Name: {{ member.name }}</h1>
 {% if member.image %}
     <img src="{{ member.image.url }}" alt="{{ member.name }} Image">
 {% endif %}
 
-<p><strong> Pronouns:</strong>{{ member.pronouns }}</p>
-<p><strong> Active Times:</strong> {{ member.active_times }}</p>
-<p><strong> Main character: under construction!</strong></p>
-<p><strong> About me:</strong> {{ member.about }}</p>
+<p id="content"><strong> Pronouns:</strong>{{ member.pronouns }}</p>
+<p id="content"><strong> Active Times:</strong> {{ member.active_times }}</p>
+<p id="content"><strong> Main character: under construction!</strong></p>
+<p id="content"><strong> About me:</strong> {{ member.about }}</p>
 
 {% if member.discord %}
-    <p><strong> Discord:</strong> {{ member.discord }}</p>
+    <p id="content"><strong> Discord:</strong> {{ member.discord }}</p>
 {% endif %}
 
 {% if member.discord_message_box is False %}
-    <p><strong> Do not direct message me!</strong></p>
+    <p id="content"><strong> Do not direct message me!</strong></p>
 {% endif %}
+
+<button class="custom_button" onclick="window.location.href='{% url 'member_delete' pk=member.pk %}'" type="button">Delete Profile</button>
+<button class="custom_button" onclick="window.location.href='{% url 'member_update' pk=member.pk %}'" type="button">Update Profile</button>
+
 
 {% endblock %}

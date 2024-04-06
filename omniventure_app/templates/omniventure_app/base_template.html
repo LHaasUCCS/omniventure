@@ -3,6 +3,15 @@
 <! DOCTYPE html>
 <html lang="en">
 
+  <style>
+    .custom_button {
+        background-color: #FAC62B;
+        color: black;
+        border-radius: 10px
+        /* Add more styles as needed */
+    }
+  </style>
+
     <head>
         <title> The Omni Venture </title>
 
@@ -13,55 +22,55 @@
         <title>Bootstrap demo</title> 
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    </head>
+
+        <style>
+          /* Custom CSS */
+          body {
+              background-color: #2F5889; /* Change this value to the desired background color */
+          }
+
+          .navbar {
+            background-image: url("{% static 'images/FC-House.webp' %}"); /* Replace 'images/navbar_bg.jpg' with the path to your image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Optional: Add more styling as needed */
+        .navbar-brand img {
+            max-height: 50px; /* Adjust height of the logo if needed */
+        }
+      </style>
+      </head>
 
     <body> 
 
         <div class="container-fluid"> 
      
-      
      
-          <!-- Navbar--> 
      
-          <nav class="navbar navbar-expand-lg bg-body-tertiary"> 
-     
-            <img src="{% static 'images/ovlogo2.webp' %}"> 
-     
-            <div class="container-fluid"> 
-     
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> 
-     
-                <span class="navbar-toggler-icon"></span> 
-     
-              </button> 
-     
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
-     
-                <div class="navbar-nav"> 
-     
-                  <!--  {% url 'index' %}  is defined in url path to dynamically create url --> 
-     
-                  <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a> 
-     
-                  <a class="nav-link" href="{% url 'member_list' %}">Members</a> 
-     
-                  {% if user.is_authenticated %} 
-     
-                   
-     
-                  {% else %} 
-     
-                    <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a> 
-     
-                  {% endif %} 
-     
-                </div> 
-     
-              </div> 
-     
-            </div> 
-     
-          </nav> 
+          <!-- Navbar-->
+          <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-center">
+            <div class="container">
+                <img src="{% static 'images/ovlogo2.webp' %}" class="navbar-brand" alt="Logo">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <button class="custom_button" style="font-size: 35px; margin-right: 40px;" onclick="window.location.href='{% url 'index' %}'" type="button">Home</button>
+                        <button class="custom_button" style="font-size: 35px; margin-right: 40px;" onclick="window.location.href='{% url 'member_list' %}'" type="button">Members</a>
+                        {% if user.is_authenticated %}
+                        <!-- Add authenticated user actions here -->
+                        {% else %}
+                        <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+          </nav>
+
      
       
      

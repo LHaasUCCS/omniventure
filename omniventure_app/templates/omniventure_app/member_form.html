@@ -1,0 +1,21 @@
+<style>
+    .custom_button {
+        background-color: #FAC62B;
+        color: Black;
+        border-radius: 10px
+        /* Add more styles as needed */
+    }
+</style>
+
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+
+{% endblock %}

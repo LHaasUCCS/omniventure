@@ -1,0 +1,12 @@
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+
+    <form action="{% url 'member_delete' pk=member.pk %}" method="POST">
+        {% csrf_token %}
+        <p style="color: white">Are you sure you want to delete "{{ member.name }}"?</p>
+        <input type="submit" value="Yes, delete.">
+        <a href="{% url 'member_detail' pk=member.pk %}">Cancel</a>
+    </form>
+
+{% endblock %}
