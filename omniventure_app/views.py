@@ -30,16 +30,29 @@ class member_list(generic.ListView):
 class member_detail(generic.DetailView):
     model = Member
 
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
 class member_create(LoginRequiredMixin, generic.CreateView):
     model = Member
     form_class = member_form
     success_url = reverse_lazy('member_edit_message')
 
+    def get(self, request, *args, **kwargs):
+        # Check if the user already has a Member instance
+        if Member.objects.filter(user=request.user).exists():
+            # If the user already has a Member instance, redirect them to a different view
+            # You can customize this behavior according to your requirements
+            member = Member.objects.get(user=request.user)
+            return redirect('member_update', pk=member.pk)  # Redirect to a different view
+        else:
+            # If the user doesn't have a Member instance, proceed with displaying the form
+            return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # Assign the current logged-in user to the user field of the Member instance
         form.instance.user = self.request.user
         return super().form_valid(form)
+
 
 class member_delete(LoginRequiredMixin, generic.DeleteView):
     model = Member
@@ -133,7 +146,7 @@ def add_character(request, pk):
         form = CharacterForm()
     return render(request, 'omniventure_app/add_character.html', {'form': form})
 
-class delete_character(generic.DeleteView):
+class delete_character(LoginRequiredMixin, generic.DeleteView):
     model = Character
     success_url = reverse_lazy('member_detail')
 
@@ -143,7 +156,7 @@ class delete_character(generic.DeleteView):
 class character_detail(generic.DetailView):
     model = Character
 
-class edit_character(generic.UpdateView):
+class edit_character(LoginRequiredMixin, generic.UpdateView):
     model = Character
     fields = ['character_id', 'background', 'personality', 'pronouns']
     

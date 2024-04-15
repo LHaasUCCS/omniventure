@@ -14,7 +14,6 @@ urlpatterns = [
     path('member/create_edit_success/', views.member_edit, name='member_edit_message'),
     path('login/', auth_views.LoginView.as_view(template_name='omniventure_app/login.html'), name='user_login'),
     path('logout/', auth_views.LogoutView.as_view(), name='user_logout'),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('register/', views.register, name='register'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='omniventure_app/login.html'), name='login'),
     path('<str:pk>/add_character/', views.add_character, name='add_character'),

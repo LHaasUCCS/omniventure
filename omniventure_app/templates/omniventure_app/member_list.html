@@ -41,7 +41,7 @@
 {% endif %}
 
 {% if user.is_authenticated %}
-    {% if not member.user == user %}
+    {% if not user.member %}
     <button class="custom_button" onclick="window.location.href='{% url 'member_create' %}'" type="button">Create New</button>
     {% endif %}
 {% endif %}
