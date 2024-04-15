@@ -1,0 +1,13 @@
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+    <h2 style="color: white;">Login</h2>
+    <form method="post">
+        <div style="color: white;">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <button class="custom_button" type="submit">Login</button>
+    </form>
+    <button class="custom_button" onclick="window.location.href='{% url 'register' %}'" type="button">Create Account</button>
+{% endblock %}

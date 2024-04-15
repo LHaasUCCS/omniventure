@@ -33,8 +33,38 @@
     <p id="content"><strong> Do not direct message me!</strong></p>
 {% endif %}
 
-<button class="custom_button" onclick="window.location.href='{% url 'member_delete' pk=member.pk %}'" type="button">Delete Profile</button>
-<button class="custom_button" onclick="window.location.href='{% url 'member_update' pk=member.pk %}'" type="button">Update Profile</button>
+{% for character in member.characters.all %}
+    <div style="background-color: #333; padding: 20px; margin-bottom: 20px; border-radius: 10px;">
+        <a href="{% url 'character_detail' character.pk %}" style="text-decoration: none; color: white;">
+            <h3>{{ character.name }}</h3>
+            <img src="{{ character.avatar }}" alt="{{ character.name }} Avatar" style="max-width: 200px; border-radius: 5px;">
+            <!-- Add more fields as needed -->
+        </a>
 
+        <!-- Edit and delete buttons -->
+        {% if user.is_authenticated %} 
+            {% if user.is_superuser or user == member.user %}
+                <div style="margin-top: 10px;">
+                    <a href="{% url 'edit_character' character.pk %}" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
+                    <form action="{% url 'delete_character' character.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #dc3545; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">Delete</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endfor %}
+
+
+
+{% if user.is_authenticated %} 
+    {% if user.is_superuser or user == member.user %}
+        <button class="custom_button" onclick="window.location.href='{% url 'member_delete' pk=member.pk %}'" type="button">Delete Profile</button>
+        <button class="custom_button" onclick="window.location.href='{% url 'member_update' pk=member.pk %}'" type="button">Update Profile</button>
+        <button class="custom_button" onclick="window.location.href='{% url 'add_character' pk=member.pk %}'" type="button">Add Character</button>
+    {% endif %}    
+{% endif %}
 
 {% endblock %}

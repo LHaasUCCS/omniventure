@@ -1,0 +1,16 @@
+{% extends "omniventure_app/base_template.html" %}
+
+{% block content %}
+
+<h2 style="color: white;">Register</h2>
+<div style="color: white;">
+<form method="post">
+    
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+    <button type="submit">Register</button>
+</form>
+</div>
+
+{% endblock %}
