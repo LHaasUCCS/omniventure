@@ -63,8 +63,9 @@
                         <button class="custom_button" style="font-size: 35px; margin-right: 40px;" onclick="window.location.href='{% url 'member_list' %}'" type="button">Members</a>
                         {% if user.is_authenticated %}
                         <!-- Add authenticated user actions here -->
+                        <button class="custom_button" style="font-size: 35px; margin-right: 40px;" onclick="window.location.href='{% url 'user_logout' %}'">Logout</button>
                         {% else %}
-                        <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                        <button class="custom_button" style="font-size: 35px; margin-right: 40px;" onclick="window.location.href='{% url 'user_login' %}'">Login</a>
                         {% endif %}
                     </div>
                 </div>
